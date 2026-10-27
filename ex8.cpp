@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int decimalToBinary(int decimalNum)
+long long decimalToBinary(int decimalNum)
 {
     int quotient = decimalNum / 2;
     int remainder = decimalNum % 2;
@@ -10,11 +10,11 @@ int decimalToBinary(int decimalNum)
         return remainder;
     }
     
-    return decimalToBinary(quotient) * 10 + remainder;
+    return decimalToBinary(quotient) * 10LL + remainder;
 }
-int pow(int num, int power)
+long long pow(int num, int power)
 {
-    int result = 1;
+    long long result = 1;
     for (int i = 0; i < power; i++)
     {
         result *= num;
@@ -22,20 +22,20 @@ int pow(int num, int power)
     return result;
 }
 
-int binaryToDecimal(int binaryNum, int powerOfTwo = 0)
+long long binaryToDecimal(long long binaryNum, int powerOfTwo = 0)
 {
-    int remainder = binaryNum % 10;
-    int quotient = binaryNum / 10;
-    int powResult = pow(2, powerOfTwo);
-    int result = remainder * powResult;
+    long long remainder = binaryNum % 10;
+    long long quotient = binaryNum / 10;
+    long long powResult = pow(2, powerOfTwo);
+    long long result = remainder * powResult;
     if (quotient == 0)
     {
         return result;
     }
-    return result + binaryToDecimal(quotient, ++powerOfTwo);
+    return result + binaryToDecimal(quotient, powerOfTwo + 1);
 }
 
-bool isBinary(int num) 
+bool isBinary(long long num) 
 {
     while (num > 0)
     {
@@ -51,7 +51,7 @@ bool isBinary(int num)
 int main()
 {
     char systemChoice;
-    int number;
+    long long number;
     cin >> systemChoice >> number;
 
     if (number < 0 || (systemChoice == 'b' && number > 500000) || (systemChoice == 'd' && !isBinary(number)))
